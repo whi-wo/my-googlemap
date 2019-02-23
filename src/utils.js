@@ -21,34 +21,27 @@ export function getGoogleMaps() {
 
 
 export function loadPlaces() {
-  return new Promise(function(resolve, reject){
-    getVenues()
-    .then(venues => {
-      if(venues.length > 0) {
-        console.log('returning venues from idb');
-        return resolve(venues) ;
-      }
-      console.log('fetching venues...');
-      let city = 'Columbus, OH';
-      let query = 'Shopping';
-      var apiURL = 'https://api.foursquare.com/v2/venues/search?client_id=N1IAMKZUIK1AUHKRFGFBKPQ2YKDSBAKS4NTER5SYZN5CROR1&client_secret=4MKLXVLU2FGZQVRMAEDC15P0TFJGSCY3ZUYUZ0KHQQQLQ5R3&v=20130815%20&limit=50&near=' + city + '&query=' + query + '';
-      fetch(apiURL)
-      .then(resp => resp.json())
-      .then(json => {
-        let { venues } = json.response;
-        console.log('storing venues...');
-        storeVenues(venues)
-        .then(res => {
-          console.log('stored venues');
-          return resolve(venues);
-        })
-      })
-      .catch(error => {
-        reject(error);
-      })
-    })
-    .catch(error => {
-      reject(error);
-    })
-  });
+  let city = 'Columbus, OH';
+  let query = 'Shopping';
+  var apiURL = 'https://api.foursquare.com/v2/venues/search?client_id=N1IAMKZUIK1AUHKRFGFBKPQ2YKDSBAKS4NTER5SYZN5CROR1&client_secret=4MKLXVLU2FGZQVRMAEDC15P0TFJGSCY3ZUYUZ0KHQQQLQ5R3&v=20130815%20&limit=50&near=' + city + '&query=' + query + '';
+  return fetch(apiURL).then(resp => resp.json())
 }
+
+  //     .then(json => {
+  //       let { venues } = json.response;
+  //       console.log('storing venues...');
+  //       storeVenues(venues)
+  //       .then(res => {
+  //         console.log('stored venues');
+  //         return resolve(venues);
+  //       })
+  //     })
+  //     .catch(error => {
+  //       reject(error);
+  //     })
+  //   })
+  //   .catch(error => {
+  //     reject(error);
+  //   })
+  // });
+  // }
