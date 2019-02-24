@@ -9,8 +9,8 @@ import { getGoogleMaps, loadPlaces } from './utils'
 class App extends Component {
   constructor(props)  {
     super(props);
-    this.state ={
-      query: ' '
+    this.state = {
+      query: ''
     }
   }
 
@@ -61,7 +61,6 @@ listItemClick = (venue) => {
   this.infowindow.setContent(marker.name);
   this.map.setCenter(marker.position);
   this.infowindow.open(this.map, marker);
-  this.map.panBy(0, -125);
 }
 
 filterVenues(query) {
