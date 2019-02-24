@@ -5,6 +5,12 @@ import './App.css';
 import { getGoogleMaps, loadPlaces } from './utils'
 
 class App extends Component {
+  constructor(props)  {
+    super(props);
+    this.state ={
+      query: ' '
+    }
+  }
   componentDidMount() {
   // getting all the things needed, google maps
     let googleMapPromise = getGoogleMaps();
@@ -16,7 +22,7 @@ class App extends Component {
     ])
     .then(values => {
       let google = values[0];
-      let venues = values[1].response.venues;
+      this.venues = values[1].response.venues;
       console.log(values);
 
       this.google = google;
@@ -25,10 +31,10 @@ class App extends Component {
       this.map = new google.maps.Map(document.getElementById('map'), {
         zoom: 9,
         scrollwheel: true,
-        center: { lat: venues[0].location.lat, lng: venues[0].location.lng }
+        center: { lat: this.venues[0].location.lat, lng: this.venues[0].location.lng }
       });
 
-      venues.forEach(venue => {
+      this.venues.forEach(venue => {
         let marker = new google.maps.Marker({
           position: { lat: venue.location.lat, lng: venue.location.lng },
           map: this.map,
@@ -38,19 +44,28 @@ class App extends Component {
           //change the animation
           animation: google.maps.Animation.DROP
         });
-      this.markers.push(this.markers);
+
+      this.markers.push(marker);
       });
 
-
+      this.setState({ filteredVenues: this.venues });
 
 
     })
 }
 
 
-// filterVenues(query){
-//
-// }
+filterVenues(query) {
+  this.markers.forEach(marker => {
+  //toggle the marker's visibility
+  marker.name.toLowerCase().includes(query.toLowerCase()) == true ?
+  marker.setVisible(true) : marker.setVisible(false);
+  console.log(marker);
+  });
+
+console.log(query);
+this.setState({ query });
+}
 
 
 
@@ -65,6 +80,19 @@ class App extends Component {
         </div>
 
         <div id="sidebar">
+        <input placeholder="filter venues" value={this.state.query}
+        onChange={(e) => {this.filteredVenues(e.target.value) }}
+        />
+        <br/>
+        {/* will only run if there are venues in the state*/}
+        { this.state.filteredVenues && this.state.filteredVenues.length > 0
+          && this.state.filteredVenues.map((venue, index) => (
+          <div key={index} className="venue-item">
+          { venue.name }
+          </div>
+          ))
+
+        }
         </div>
       </div>
     );
