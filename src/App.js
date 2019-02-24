@@ -88,8 +88,11 @@ this.setState({ filteredVenues: results, query });
       <div>
         <div id="map">
         </div>
-
-        <Sidebar />
+        <Sidebar
+          filterVenues={(this.filterVenues)}
+          filteredVenues={(this.state.filteredVenues)}
+          listItemClick={(this.listItemClick)}
+          />
       </div>
     );
   }

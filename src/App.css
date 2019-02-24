@@ -11,6 +11,22 @@ body {
   height: 80px;
 }
 
+button {
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  padding: 20px;
+  background-color: red;
+  border-radius: 8px;
+  border: 2px solid green;
+  cursor: pointer;
+
+}
+
+button:hover {
+  background-color: white;
+  hover: pointer;
+}
+
 .venue-name {
   color: #007bff;
   text-decoration: none;
