@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 
-//import * as from './utils'
+import Sidebar from './components/sidebar'
+
+
 import { getGoogleMaps, loadPlaces } from './utils'
 
 class App extends Component {
@@ -11,6 +13,7 @@ class App extends Component {
       query: ' '
     }
   }
+
   componentDidMount() {
   // getting all the things needed, google maps
     let googleMapPromise = getGoogleMaps();
@@ -49,22 +52,29 @@ class App extends Component {
       });
 
       this.setState({ filteredVenues: this.venues });
-
-
     })
 }
 
+listItemClick = (venue) => {
+  let marker = this.markers.filter(m  => m.id === venue.id)[0];
+  console.log(marker);
+  this.infowindow.setContent(marker.name);
+  this.map.setCenter(marker.position);
+  this.infowindow.open(this.map, marker);
+  this.map.panBy(0, -125);
+}
 
 filterVenues(query) {
+  let results = this.venues.filter(venue => venue.name.toLowerCase().includes(query.toLowerCase()));
   this.markers.forEach(marker => {
   //toggle the marker's visibility
-  marker.name.toLowerCase().includes(query.toLowerCase()) == true ?
+  marker.name.toLowerCase().includes(query.toLowerCase()) === true ?
   marker.setVisible(true) : marker.setVisible(false);
   console.log(marker);
   });
 
 console.log(query);
-this.setState({ query });
+this.setState({ filteredVenues: results, query });
 }
 
 
@@ -79,21 +89,7 @@ this.setState({ query });
         <div id="map">
         </div>
 
-        <div id="sidebar">
-        <input placeholder="filter venues" value={this.state.query}
-        onChange={(e) => {this.filteredVenues(e.target.value) }}
-        />
-        <br/>
-        {/* will only run if there are venues in the state*/}
-        { this.state.filteredVenues && this.state.filteredVenues.length > 0
-          && this.state.filteredVenues.map((venue, index) => (
-          <div key={index} className="venue-item">
-          { venue.name }
-          </div>
-          ))
-
-        }
-        </div>
+        <Sidebar />
       </div>
     );
   }
