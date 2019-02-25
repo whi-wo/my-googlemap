@@ -28,15 +28,17 @@ class App extends Component {
       this.venues = values[1].response.venues;
       console.log(values);
 
+
       this.google = google;
       this.markers = [];
+
       this.infowindow = new google.maps.InfoWindow();
       this.map = new google.maps.Map(document.getElementById('map'), {
         zoom: 12,
         scrollwheel: true,
         center: { lat: this.venues[0].location.lat, lng: this.venues[0].location.lng }
       });
-
+      //creating a marker for each venue
       this.venues.forEach(venue => {
         let marker = new google.maps.Marker({
           position: { lat: venue.location.lat, lng: venue.location.lng },
@@ -44,8 +46,17 @@ class App extends Component {
           venue: venue,
           id: venue.id,
           name: venue.name,
+          title: venue.name,
+          address: venue.location.formattedAddress,
           animation: google.maps.Animation.DROP
         });
+        //when the marker is clicked open the infowindow
+        google.maps.event.addListener(marker, 'click', () => {
+  			   this.infowindow.setContent(marker.name);
+				   this.map.setZoom(13);
+				   this.map.setCenter(marker.position);
+				   this.infowindow.open(this.map, marker);
+			  });
 
       this.markers.push(marker);
       });
@@ -57,13 +68,20 @@ class App extends Component {
     alert('there was an error loading the page, please refresh.');
   })
 }
-
+//when a button in the sidebar is clicked, an info window will appear and the marker will bounce.
 listItemClick = (venue) => {
   let marker = this.markers.filter(m  => m.id === venue.id)[0];
   console.log(marker);
   this.infowindow.setContent(marker.name);
   this.map.setCenter(marker.position);
   this.infowindow.open(this.map, marker);
+
+  if(marker) {
+      if (marker.getAnimation() !== null) { marker.setAnimation(null); }
+      else { marker.setAnimation(this.google.maps.Animation.BOUNCE); }
+      setTimeout(() => { marker.setAnimation(null) }, 1500);
+    }
+
 }
 
 filterVenues(query) {

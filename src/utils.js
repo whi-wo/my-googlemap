@@ -23,7 +23,10 @@ export function getGoogleMaps() {
 export function loadPlaces() {
   let city = 'Columbus, OH';
   let query = 'art';
-  var apiURL = 'https://api.foursquare.com/v2/venues/search?client_id=N1IAMKZUIK1AUHKRFGFBKPQ2YKDSBAKS4NTER5SYZN5CROR1&client_secret=4MKLXVLU2FGZQVRMAEDC15P0TFJGSCY3ZUYUZ0KHQQQLQ5R3&v=20130815%20&limit=5&near=' + city + '&query=' + query + '';
+  let client_id = 'N011PAT2QBX14EUR3ZYVJCBVZCC5NGATAHCBHQAHUBQ0WUA1'
+  let client_secret = 'I0CKMRCYV0M3FKYDCWB21I5GD4KEXNSHTRG4D4ANVFBTPD1L'
+  var apiURL = 'https://api.foursquare.com/v2/venues/search?client_id='+client_id+
+	'&client_secret='+client_secret+'&v=20190210%20&limit=5&near=' + city + '&query=' + query + '';
   return fetch(apiURL).then(resp => resp.json())
 }
 

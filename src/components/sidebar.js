@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../App.css';
 
 class Sidebar extends Component {
-	
+
 
 
 
@@ -13,7 +13,7 @@ class Sidebar extends Component {
 	render() {
     return (
 				<div id="sidebar">
-					<input placeholder="Filter Sites" value={this.props.query}
+					<input placeholder="Type here to Filter Sites" value={this.props.query}
 						onChange={(e) => {this.props.filterVenues(e.target.value)}}/>
 						{/* will only run if there are venues in the state
 
@@ -23,7 +23,8 @@ class Sidebar extends Component {
 						{this.props.filteredVenues && this.props.filteredVenues.length > 0
 							&& this.props.filteredVenues.map((venue, index) => (
 							<button key={index} className="venue-item" onClick={() =>
-								{this.props.listItemClick(venue)}}>
+								{this.props.listItemClick(venue)}}
+								>
 								{venue.name}
 							</button>
 						))
