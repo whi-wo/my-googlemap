@@ -32,7 +32,7 @@ class App extends Component {
       this.markers = [];
       this.infowindow = new google.maps.InfoWindow();
       this.map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 9,
+        zoom: 12,
         scrollwheel: true,
         center: { lat: this.venues[0].location.lat, lng: this.venues[0].location.lng }
       });
@@ -44,7 +44,6 @@ class App extends Component {
           venue: venue,
           id: venue.id,
           name: venue.name,
-          //change the animation
           animation: google.maps.Animation.DROP
         });
 
@@ -53,6 +52,10 @@ class App extends Component {
 
       this.setState({ filteredVenues: this.venues });
     })
+  .catch(error => {
+    console.log(error);
+    alert('there was an error loading the page, please refresh.');
+  })
 }
 
 listItemClick = (venue) => {
@@ -85,7 +88,8 @@ this.setState({ filteredVenues: results, query });
   render() {
     return (
       <div>
-        <div id="map">
+        <h1>My Neighorhood Map</h1>
+        <div id="map" role="application" aria-label="map">
         </div>
         <Sidebar
           filterVenues={(this.filterVenues)}
