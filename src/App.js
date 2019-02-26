@@ -19,9 +19,10 @@ class App extends Component {
     let googleMapPromise = getGoogleMaps();
     let placesPromise = loadPlaces();
 
+
     Promise.all([
       googleMapPromise,
-      placesPromise
+      placesPromise,
     ])
     .then(values => {
       let google = values[0];
@@ -47,17 +48,21 @@ class App extends Component {
           id: venue.id,
           name: venue.name,
           title: venue.name,
+          link: "'https://foursquare.com/v/'+venue.id",
           address: venue.location.formattedAddress,
           animation: google.maps.Animation.DROP
         });
         //when the marker is clicked open the infowindow
         google.maps.event.addListener(marker, 'click', () => {
-  			   this.infowindow.setContent(marker.name);
+  			   this.infowindow.setContent(`<h3 id="title">${marker.name}</h3>`+
+            `<span id="addy">Address:</span>`+`<br>`+
+           	marker.address.join(', ')+`<br>`
+            );
 				   this.map.setZoom(13);
 				   this.map.setCenter(marker.position);
 				   this.infowindow.open(this.map, marker);
 			  });
-
+        console.log(venue.link);
       this.markers.push(marker);
       });
 
@@ -68,6 +73,9 @@ class App extends Component {
     alert('there was an error loading the page, please refresh.');
   })
 }
+
+
+
 //when a button in the sidebar is clicked, an info window will appear and the marker will bounce.
 listItemClick = (venue) => {
   let marker = this.markers.filter(m  => m.id === venue.id)[0];
@@ -94,7 +102,7 @@ filterVenues(query) {
   });
 
 console.log(query);
-this.setState({ filteredVenues: results, query });
+this.setState({filteredVenues: results, query});
 }
 
 

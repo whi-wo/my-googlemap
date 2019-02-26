@@ -13,7 +13,8 @@ class Sidebar extends Component {
 	render() {
     return (
 				<div id="sidebar">
-					<input placeholder="Type here to Filter Sites" value={this.props.query}
+
+					<input placeholder="Type here to Filter Sites" id="filter" value={this.props.query}
 						onChange={(e) => {this.props.filterVenues(e.target.value)}}/>
 						{/* will only run if there are venues in the state
 
