@@ -13,8 +13,8 @@ class Sidebar extends Component {
 	render() {
     return (
 				<aside id="sidebar" aria-label="Filtered Venues">
-
-					<input type="text" placeholder="Type here to Filter Sites" id="filter" value={this.props.query}
+					<label htmlFor="filter">Filter</label>
+					<input type="text" id="filter" placeholder="Type here to Filter Sites" id="filter" value={this.props.query}
 						onChange={(e) => {this.props.filterVenues(e.target.value)}}/>
 						{/* will only run if there are venues in the state
 
