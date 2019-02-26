@@ -50,6 +50,7 @@ class App extends Component {
           name: venue.name,
           title: venue.name,
           address: venue.location.formattedAddress,
+          category: venue.categories,
           animation: google.maps.Animation.DROP
         });
         //when the marker is clicked open the infowindow
@@ -60,7 +61,7 @@ class App extends Component {
            	marker.address.join(', ')+`<br>`
             );
 				   this.map.setZoom(13);
-				   this.map.setCenter(marker.position);
+				   this.map.setCenter(marker.position+marker.category);
 				   this.infowindow.open(this.map, marker);
 			  });
 
@@ -75,13 +76,17 @@ class App extends Component {
   })
 }
 
-
+// getVenueCategory = () => {
+//   const category = venue.categories[0].name;
+// }
 
 //when a button in the sidebar is clicked, an info window will appear and the marker will bounce.
 listItemClick = (venue) => {
   let marker = this.markers.filter(m  => m.id === venue.id)[0];
   console.log(marker);
-  this.infowindow.setContent(marker.name);
+  this.infowindow.setContent(marker.name+`<br>`+
+  `<span id="categ">${marker.category[0].name}</span>`
+  );
   this.map.setCenter(marker.position);
   this.infowindow.open(this.map, marker);
 
@@ -110,7 +115,7 @@ this.setState({ filteredVenues: results, query });
     return (
       <div>
         <h1>The Arts in Columbus</h1>
-        <div id="map" role="application" aria-label="map">
+        <div id="map" role="application" aria-label="Art sites map">
         </div>
         <Sidebar
           filterVenues={(this.filterVenues)}
