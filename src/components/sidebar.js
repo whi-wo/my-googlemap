@@ -23,7 +23,7 @@ class Sidebar extends Component {
 
 						{this.props.filteredVenues && this.props.filteredVenues.length > 0
 							&& this.props.filteredVenues.map((venue, index) => (
-							<button key={index} className="venue-item" onClick={() =>
+							<button key={index} onClick={() =>
 								{this.props.listItemClick(venue)}}
 								>
 								{venue.name}

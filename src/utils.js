@@ -22,11 +22,11 @@ export function getGoogleMaps() {
 
 export function loadPlaces() {
   let city = 'Columbus, OH';
-  let query = 'gardens';
+  let query = 'arts';
   let client_id = 'N011PAT2QBX14EUR3ZYVJCBVZCC5NGATAHCBHQAHUBQ0WUA1'
   let client_secret = 'I0CKMRCYV0M3FKYDCWB21I5GD4KEXNSHTRG4D4ANVFBTPD1L'
   var apiURL = 'https://api.foursquare.com/v2/venues/search?client_id='+client_id+
-	'&client_secret='+client_secret+'&v=20190210%20&limit=5&near=' + city + '&query=' + query + '';
+	'&client_secret='+client_secret+'&v=20190210%20&limit=50&near=' + city + '&query=' + query + '';
   return fetch(apiURL).then(resp => resp.json())
 }
 

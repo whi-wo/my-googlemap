@@ -10,7 +10,8 @@ class App extends Component {
   constructor(props)  {
     super(props);
     this.state = {
-      query: ''
+      query: '',
+      filteredVenues: []
     }
   }
 
@@ -35,7 +36,7 @@ class App extends Component {
 
       this.infowindow = new google.maps.InfoWindow();
       this.map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 12,
+        zoom: 14,
         scrollwheel: true,
         center: { lat: this.venues[0].location.lat, lng: this.venues[0].location.lng }
       });
@@ -48,13 +49,13 @@ class App extends Component {
           id: venue.id,
           name: venue.name,
           title: venue.name,
-          link: "'https://foursquare.com/v/'+venue.id",
           address: venue.location.formattedAddress,
           animation: google.maps.Animation.DROP
         });
         //when the marker is clicked open the infowindow
         google.maps.event.addListener(marker, 'click', () => {
   			   this.infowindow.setContent(`<h3 id="title">${marker.name}</h3>`+
+           // eslint-disable-next-line
             `<span id="addy">Address:</span>`+`<br>`+
            	marker.address.join(', ')+`<br>`
             );
@@ -62,7 +63,7 @@ class App extends Component {
 				   this.map.setCenter(marker.position);
 				   this.infowindow.open(this.map, marker);
 			  });
-        console.log(venue.link);
+
       this.markers.push(marker);
       });
 
@@ -92,29 +93,23 @@ listItemClick = (venue) => {
 
 }
 
-filterVenues(query) {
+filterVenues = (query) => {
   let results = this.venues.filter(venue => venue.name.toLowerCase().includes(query.toLowerCase()));
   this.markers.forEach(marker => {
   //toggle the marker's visibility
   marker.name.toLowerCase().includes(query.toLowerCase()) === true ?
   marker.setVisible(true) : marker.setVisible(false);
-  console.log(marker);
   });
 
 console.log(query);
-this.setState({filteredVenues: results, query});
+this.setState({ filteredVenues: results, query });
 }
-
-
-
-
-
 
 
   render() {
     return (
       <div>
-        <h1>My Neighorhood Map</h1>
+        <h1>The Arts in Columbus</h1>
         <div id="map" role="application" aria-label="map">
         </div>
         <Sidebar
