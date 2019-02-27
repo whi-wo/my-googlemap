@@ -113,13 +113,14 @@ this.setState({ filteredVenues: results, query });
     return (
       <div tabIndex="3">
         <h1 tabIndex="-10">The Arts in Columbus</h1>
-        <main tabIndex="4" id="map" role="application" aria-label="Art sites map">
-        </main>
         <Sidebar
           filterVenues={(this.filterVenues)}
           filteredVenues={(this.state.filteredVenues)}
           listItemClick={(this.listItemClick)}
           />
+        <main tabIndex="4" id="map" role="application" aria-label="Art sites map">
+        </main>
+        
       </div>
     );
   }
