@@ -85,6 +85,7 @@ input {
 }
 
 @media (min-width: 768px) {
-  #nav {flex-direction: row; flex-wrap: wrap;}
+  /* input{flex-basis: auto;} */
+  #nav {flex-direction: row; flex-wrap: wrap; justify-content: flex-start;}
   #btncontainer {display: flex; flex-direction: row; justify-content: space-evenly;}
 }
