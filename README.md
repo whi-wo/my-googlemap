@@ -12,6 +12,7 @@ To get started developing right away:
 
 * install all project dependencies with `npm install`
 * start the development server with `npm start`
+* Special Note: you may need to do `npm build` to see Service Worker functionality
 
 ### `npm start`
 
@@ -37,3 +38,4 @@ Feedback for this project is strongly encouraged! I want to keep refactoring thi
 - Udacity & Google for this incredible opportunity (and program extension!)
 - Fellow Udacity classmates
 - Vanilla Hazelnut coffee
+- [@kaleemcreates](https://github.com/kaleemcreates)
