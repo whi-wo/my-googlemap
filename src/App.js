@@ -57,7 +57,7 @@ class App extends Component {
         google.maps.event.addListener(marker, 'click', () => {
   			   this.infowindow.setContent(`<h3 id="title">${marker.name}</h3>`+
            // eslint-disable-next-line
-            `<span id="addy">Address:</span>`+`<br>`+
+            `<span aria-label="address" id="addy">Address:</span>`+`<br>`+
            	marker.address.join(', ')+`<br>`
             );
 				   this.map.setZoom(13);
@@ -76,16 +76,14 @@ class App extends Component {
   })
 }
 
-// getVenueCategory = () => {
-//   const category = venue.categories[0].name;
-// }
+
 
 //when a button in the sidebar is clicked, an info window will appear and the marker will bounce.
 listItemClick = (venue) => {
   let marker = this.markers.filter(m  => m.id === venue.id)[0];
   console.log(marker);
   this.infowindow.setContent(marker.name+`<br>`+
-  `<span id="categ">${marker.category[0].name}</span>`
+  `<span aria-label="venue category" id="categ">${marker.category[0].name}</span>`
   );
   this.map.setCenter(marker.position);
   this.infowindow.open(this.map, marker);
@@ -113,10 +111,10 @@ this.setState({ filteredVenues: results, query });
 
   render() {
     return (
-      <div>
-        <h1>The Arts in Columbus</h1>
-        <div id="map" role="application" aria-label="Art sites map">
-        </div>
+      <div tabIndex="3">
+        <h1 tabIndex="-10">The Arts in Columbus</h1>
+        <main tabIndex="4" id="map" role="application" aria-label="Art sites map">
+        </main>
         <Sidebar
           filterVenues={(this.filterVenues)}
           filteredVenues={(this.state.filteredVenues)}

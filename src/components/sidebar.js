@@ -12,18 +12,14 @@ class Sidebar extends Component {
 
 	render() {
     return (
-				<aside id="sidebar" aria-label="Filtered Venues">
-					<label htmlFor="filter">Filter</label>
-					<input type="text" placeholder="Type here to Filter Sites" id="filter" value={this.props.query}
+				<aside id="sidebar" aria-label="Filtered Venues" role="list">
+					<label htmlFor="filter"aria-label="filter"></label>
+					<input tabIndex="1" type="text" placeholder="Type here to Filter Sites" id="filter" value={this.props.query}
 						onChange={(e) => {this.props.filterVenues(e.target.value)}}/>
-						{/* will only run if there are venues in the state
-
-							the buttons should have their OWN COMPONENT TOO!
-						*/}
 
 						{this.props.filteredVenues && this.props.filteredVenues.length > 0
 							&& this.props.filteredVenues.map((venue, index) => (
-							<button key={index} onClick={() =>
+							<button aria-label="Venue Name" tabIndex="2" key={index} onClick={() =>
 								{this.props.listItemClick(venue)}}
 								>
 								{venue.name}
