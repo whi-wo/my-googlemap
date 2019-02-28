@@ -17,16 +17,11 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
   <script>
-
-  //handles other issues with Google Map API
+  //extra handling other issues with Google Map API
   window.addEventListener("error", handleError, true);
   function handleError(e) {
     alert('There was an issue loading the Google Map')
   }
-  //handles error with Google API API
-  window.gm_authFailure = function() {
- alert('The Google Map API has failed to load. There may be an issue with the API Key. Please try again.');
-}
   </script>
   </body>
 </html>

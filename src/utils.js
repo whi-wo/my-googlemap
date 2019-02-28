@@ -16,10 +16,6 @@ export function getGoogleMaps() {
     script.src = `https://maps.googleapis.com/maps/api/js?key=${API}&callback=resolveGoogleMapsPromise`;
     script.async = true;
     document.body.appendChild(script);
-
-
-
-
   });
 
 }
