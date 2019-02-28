@@ -4,7 +4,7 @@ import './App.css';
 import Sidebar from './components/sidebar'
 
 
-import { getGoogleMaps, loadPlaces } from './utils'
+import { getGoogleMaps, loadPlaces} from './utils'
 
 class App extends Component {
   constructor(props)  {
@@ -19,6 +19,9 @@ class App extends Component {
   // getting all the things needed, google maps
     let googleMapPromise = getGoogleMaps();
     let placesPromise = loadPlaces();
+
+
+
 
 
     Promise.all([
@@ -120,7 +123,7 @@ this.setState({ filteredVenues: results, query });
           />
         <main tabIndex="4" id="map" role="application" aria-label="Art sites map">
         </main>
-        
+
       </div>
     );
   }

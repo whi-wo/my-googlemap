@@ -1,6 +1,7 @@
 //utility function to load google maps directly for development ease
 //credit to Ryan Waite for walkthrough
 
+
 export function getGoogleMaps() {
   return new Promise((resolve) => {
 		// this defines the global callback that will run when the google map is loaded
@@ -15,8 +16,14 @@ export function getGoogleMaps() {
     script.src = `https://maps.googleapis.com/maps/api/js?key=${API}&callback=resolveGoogleMapsPromise`;
     script.async = true;
     document.body.appendChild(script);
+
+
+
+
   });
+
 }
+
 
 
 
